@@ -1,5 +1,5 @@
 (function() {
-  export class EventEmitter {
+  class EventEmitter {
     // utils/EventEmitter.js
     static GLOBAL_ACCESSOR = '__BROWSER_CLIENT_EVENT_EMITTER__';
 
@@ -36,8 +36,27 @@
     }
   }
 
+  // utils/Message.js
+  class Message {
+    static GLOBAL_ACCESSOR = '__BROWSER_CLIENT_MESSAGE__';
+
+    constructor(message) {
+      this._message = {
+        payload: message.payload,
+        source: message.source
+      };
+    }
+
+    get() {
+      return this._message;
+    }
+
+    set() {}
+  }
+
   // index.js
-  (function main(BrowserEventEmitter) {
+  (function main(BrowserEventEmitter, BrowserMessage) {
     window[BrowserEventEmitter.GLOBAL_ACCESSOR] = new BrowserEventEmitter();
-  })(EventEmitter);
-});
+    window[BrowserMessage.GLOBAL_ACCESSOR] = BrowserMessage;
+  })(EventEmitter, Message);
+})();
