@@ -47,12 +47,14 @@
       };
     }
 
-    get() {
-      return this._message;
+    get payload() {
+      return this._message.payload;
     }
 
-    set() {}
-  }
+    get source() {
+      return this._message.source;
+    }
+  } 
 
   // index.js
   (function main(BrowserEventEmitter, BrowserMessage) {
